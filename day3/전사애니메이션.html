@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>전사애니메이션</title>
+<script>
+//문서내의 pic이라는 이미지의 src를 바꾸자
+var x=1;
+
+function next(){
+	x++;
+	console.log(x);
+	//x=(x>=19)? 1:x;
+if(x>=19){
+	x=1;
+}else{
+	x=x;
+}
+	document.getElementById("pic").src="../images/warior/image"+x+".png"
+
+	//컴퓨터 스스로 이 함수를 호출하게 하자.
+	setTimeout("next()",100);
+}
+
+</script>
+</head>
+<body>
+<img src='../images/warior/image1.png' id="pic"><br>
+<input type = 'button' value = "start" onmousewheel="next()">
+</body>
+</html>

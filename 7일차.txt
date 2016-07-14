@@ -1,0 +1,7 @@
+이차원 배열
+
+
+
+
+///
+var tag=document.createElement("원하는태그");	//원하는 태그를 출력

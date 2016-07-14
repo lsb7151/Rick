@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>SwitchOnOFF</title>
+<style>
+/*누구를 어떻게 할지에 대한 문법으로 구성됨*/
+input{
+	width:100px;
+	height:30px;
+	background:#ffffcc;
+	font-size:10pt;
+	color:#000000;
+	font-weight:bold;
+}
+body{
+	background:yellow;
+}
+</style>
+<script>
+//var x=0;
+var bg;	//배경색을 결정하는 변수
+var flag=false;	//현재 상태가 꺼져있는지 켜져있는지 판단하기 위한 변수.
+function On(){
+	//문서의 적용된 스타일 백그라운드를 노란색으로 지정
+	document.body.style.background="yellow";
+}
+function Off(){
+	//문서에 적용된 스타일 백그라운드를 검은색으로 지정
+	document.body.style.background="black";
+}
+
+function toggle(){
+// 내가한거
+//	x++;
+//	((x%=2)==0) ? (document.body.style.background="yellow"):(document.body.style.background="black");
+	flag=!flag;
+	//bg=(flag)? "black":"yellow"; 
+if(flag){
+	bg="black";
+}else{
+	bg="yellow";
+}
+	document.body.style.background=bg;
+}
+</script>
+</head>
+<body>
+<input type="button" value="ON" onClick="On()">
+<input type="button" value="OFF" onClick="Off()">
+<input type="button" value="원터치" onClick="toggle()">
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>로그인 양식제어</title>
+<style>
+</style>
+<script>
+//id와 password입력을 제대로 유효하게 작성한 사람에 대해서만 로그인시도를 해줌.
+function loginCheck(){
+	if(document.getElementById("member_id").value==""){
+		document.getElementById("member_id").focus();
+		return;
+	}else if(!document.getElementById("member_pwd").value){
+		return;	
+	}
+	location.href="http://daum.net";
+}
+
+</script>
+</head>
+<body>
+	<table width="230px" border="1px" align="center">
+		<tr>
+			<td>ID</td>
+			<td><input type="text" maxlength="8" id="member_id"></td>
+		</tr>
+		<tr>
+			<td>PW</td>
+			<td><input type="password" maxlength="8" id="member_pwd"></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="button" value="로그인" onClick="loginCheck()">
+				<input type="button" value="회원가입">
+				<input type="button" value="ID/PW찾기">
+			</td>
+		</tr>
+
+	</table>
+</body>
+</html>
+

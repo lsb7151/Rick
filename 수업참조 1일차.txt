@@ -1,0 +1,29 @@
+HTML 편집기 : editplus
+DB 첫날 : 오라클 익스프레스 http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html
+다른컴퓨터 ip로 접속하기 : \\아이피
+
+HTML 태그 참고 사이트 : http://www.w3schools.com/
+
+에딧편집기 html 템플릿
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+
+
+
+#오라클
+oracleserviceXe 수동으로하기
+
+
+민진호
+zino1187@baver.com
+blog.naver.com/zino1187
+
+

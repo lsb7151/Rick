@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<style>
+#monitor{
+	background : #ffffcc;
+	width : 300px;
+	height : 40px;
+	border:2px solid #ccccff;
+	font-size : 20pt;
+	color : #000000
+	font-weight:bold;
+}
+</style>
+<script>
+var isPlaying=false;	//플레이 시킬지, 멈출지 여부하는 결정하는 논리값
+//문서내의 music 이라는 요소를 플레이하자.
+var count=1;	//어떤 파일을 실행할지 그 이름을 담게될 변수.
+function play(){
+	if(!isPlaying){
+		document.getElementById("music").loop=document.getElementById("ch").checked;	//체크박스의 상태에 따라 loop여부를 결정
+		document.getElementById("music").load();	//메모리 적재
+		document.getElementById("music").play();
+		document.getElementById("music_name").innerText=count+".mp3";		//tag와 tag사이의 글자를 바꾸는 명령어
+		document.getElementById("bt_play").value="∥";
+	}else{
+		document.getElementById("music").load();
+		document.getElementById("music").pause();
+		document.getElementById("bt_play").value="▶";
+	}
+	isPlaying=!isPlaying;
+}
+function stop(){
+	//load() = 다시 음악을 준비시켜라
+	document.getElementById("music").load();
+}
+function next(){
+	count++;
+	document.getElementById("dest").src="../music/"+count+".mp3";
+	document.getElementById("music").load();	// 변경된 음악을 메모리에 로딩할 시간을 줘야한다.
+	document.getElementById("music").play();	// 그리고나서 플레이가 됨.
+	document.getElementById("music_name").innerText=count+".mp3";	
+}
+function prev(){
+	count--;
+	document.getElementById("dest").src="../music/"+count+".mp3";
+	document.getElementById("music").load();
+	document.getElementById("music").play();	
+	document.getElementById("music_name").innerText=count+".mp3";	
+}
+</script>
+</head>
+<body>
+Repeat:<input type="checkbox" id="ch">
+<div id="monitor">
+<marquee id = "music_name">재생버튼을 누르세요</marquee>
+<audio id="music">
+  <source id ="dest" src="../music/1.mp3 " type="audio/mpeg">
+</audio>
+</div>
+<input type="button" value="◀◀" onClick="prev()">
+<input type="button" value="■" onClick="stop()">
+<input type="button" value="▶" onClick="play()" id="bt_play">
+<input type="button" value="▶▶" onClick="next()">
+</body>
+</html>

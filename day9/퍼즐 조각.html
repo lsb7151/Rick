@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<style>
+</style>
+<script src="../lib/puzzle.js"></script>
+<script>
+var stage;
+var bg=["red","orange","yellow","green","blue","navy","purple"];
+
+// 프로그램이 가동되자마자 백그라운드가 노란색인 div를 생성 및 추가하기.
+window.addEventListener("load",function(){
+	stage=document.createElement("div");
+	stage.style.width=800+"px";
+	stage.style.height=800+"px";
+	stage.style.background="yellow";
+	stage.style.margin="auto";
+	//연예인 사진 배경으로 지정하기
+	stage.style.background="url('../images/back.jpg')";
+	
+	document.body.appendChild(stage);
+
+	createBox();
+});
+
+//다량의  div를 생성하기
+function createBox(){
+	for(i=1; i<=64; i++){
+		var r=parseInt(Math.random()*bg.length);
+		var p=new Puzzle(stage, 100, 100, bg[r]);
+		p.init();
+	}
+}
+
+
+</script>
+</head>
+<body></body>
+</html>

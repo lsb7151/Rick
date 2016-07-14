@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>연산자문제풀이4번</title>
+<script>
+
+//document.write("ㅁ22ㅇㄹ");	// 문서에 출력함 하지만 함수와 응용시 출력상태에서 변경가능(body에 들어가는 디자인영역과는 다르다)
+
+/* 4가 나오는 원인은? 증강연산자 중 ++,--연산자는 피연산자의 앞,뒤 모두에 사용가능한데, 특히 뒤에올 경우 우선순위가 후순위가 된다. 앞에 올 경우엔 선순위*/
+var b=3;
+b++;
+document.write(b++); // 여기까지만 쓰면 4까지만 출력됨
+document.write(b); // 한번더 출력하면 뒤의 ++가 같이 표시되서 5로 출력됨
+document.write(다음문제);
+var a=true;
+var b= !a;
+document.write(a==!b);
+</script>
+</head>
+<body>
+</body>
+</html>

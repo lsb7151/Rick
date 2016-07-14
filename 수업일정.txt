@@ -1,0 +1,18 @@
+1개월차 
+프로그램 : HTML+Javascript, JQuery, Ajax, Node.js , 
+DB : Oracle, MySQL, Mariadb
+
+2개월차
+프로그램 : JAVA
+
+3개월차
+프로그램 : JSP + Spring, 각종 프레임워크(Mybatis, HIbernate, JPA)
+
+4개월차
+프로그램 : 안드로이드
+
+5개월차
+C, IOT
+
+6개월차
+프로젝트진행 + 최신기술수업

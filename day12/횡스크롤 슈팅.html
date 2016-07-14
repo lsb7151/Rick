@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>횡스크롤 슈팅</title>
+<style>
+body{margin:0px;}
+#stage{
+	width:100%;
+	height:800px;
+	background-image:url("../images/background.jpg");
+}
+</style>
+<script src="../lib/lib.js"></script>
+<script src="../lib/Unit.js"></script>
+<script src="../lib/ship.js"></script>
+<script src="../lib/Bullet.js"></script>
+<script>
+var stage;
+var bgX=0;
+var ship;
+var enemyArray=new Array();
+
+window.addEventListener("load", function(){
+	init();
+	
+
+});
+
+function init(){
+	stage=document.getElementById("stage");
+	stage.style.width=screen.width+"px";
+	stage.style.height=800+"px";
+	//배경 흐름 처리
+	bgEffect();
+
+	//우주선 등장
+	ship=new Ship(stage, 100,50,100,400,"../images/ship.png");
+	ship.init();
+
+	//적군등장
+	for(var i=0; i<=8; i++){
+		var unit=new Unit(stage,100, 103, screen.width-200,i*100,"../images/warior/image1.png");
+		enemyArray.push(unit);
+		unit.init();
+	}
+}
+
+//상,하,좌,우 이벤트 처리
+window.addEventListener("keydown", function(){
+	var key=event.keyCode;
+	switch(key){
+		case 32:fire();break;
+		case 37:ship.velX=-2;break;
+		case 38:ship.velY=-2;break;
+		case 39:ship.velX=2;break;
+		case 40:ship.velY=2;break;
+	}
+});
+window.addEventListener("keyup", function(){
+	var key=event.keyCode;
+
+	if(key==37||key==38||key==39||key==40){
+		ship.velX=0;
+		ship.velY=0;
+	}
+});
+
+//우주선 총알발사
+function fire(){
+	var b= new Bullet(stage, ship.x+90, ship.y);
+	b.init();
+}
+//배경흐름처리
+function bgEffect(){
+	bgX-=1;
+	stage.style.backgroundPosition=bgX+"px 0px";
+	setTimeout("bgEffect()",1);
+}
+</script>
+</head>
+<body>
+<div id="stage">
+	
+</div>
+</body>
+</html>

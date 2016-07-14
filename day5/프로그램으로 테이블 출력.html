@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script>
+var f = prompt("층수를 입력하세요");
+var h = prompt("호수를 입력하세요");
+var w = prompt("건물두께를 입력하세요");
+var wid = prompt("건물의 가로폭을 입력하세요");
+
+document.write("<table width=\""+wid+"px\" border=\""+w+"px\">");
+for(var x=f; x>=1; x--){
+	document.write("<tr>");
+	for(var i=1; i<=h; i++){
+		if(i<10){
+			document.write("<td>"+x+"0"+i+"호</td>");
+			}else if(10<i<100){
+			document.write("<td>"+x+""+i+"호</td>");
+			}
+	}
+	document.write("</tr>");
+}
+document.write("</table>");
+
+</script>
+</head>
+<body>
+</body>
+</html>

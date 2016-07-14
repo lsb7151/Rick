@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text" value="0" id="txt">		<!-- input명령어는 뭔가를 넣을수있음 text타입을 삽입, 초기값 0, txt라고 선언해줌 -->
+	<input type="button" value="카운터 증가" onClick="add()">		<!-- 버튼타입을 만들고 이름을 카운터증가라한다 그리고 클릭을했을때 add()호출 -->
+</body>
+</html>
+<script>
+//버튼을 누르면 카운터값을 1씩 증가시켜 텍스트입력상자에 표시하기.
+var i=0;		// {}가 닫히면 끝나기때문에 밖으로 따로 뺴주어 계속 살아있게 만듦. 전역변수. 프로세스 즉 현재 실행중인 프로그램이 닫히면 소멸
+//버튼을 누르면 수행할 코드영역
+function add(){	//내가 원할때 호출될 수 있는 코드 영역을 함수라 한다.
+	//var i=1;   //;는 한문장의 끝을 의미 {}영역내에서만 생명력을 갖는 변수를 지역변수라 하며 닫는 괄호를 만나면 변수는 메모리에서 사라진다.
+	i++;
+	document.getElementById("txt").value=i;	//문서(돔)내 txt라는 아이디의 요소를 불러온다 그리고 그 값(value)을 지정해줌
+
+}
+</script>

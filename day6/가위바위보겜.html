@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>가위바위보겜</title>
+<script>
+var finger = new Array();
+finger[0]="가위.png"
+finger[1]="바위.png"
+finger[2]="보.png"
+
+var count=0;
+
+var r=Math.random();
+document.write("<img src=\"../images/"+finger[parseInt(r*finger.length)]+"\">");
+/*
+var arr=[
+		"가위.png",
+		"바위.png",
+		"보.png"
+	];
+var r = Math.random(); //0.1213213123
+var n=parseInt(r*arr.length);
+
+document.write("<img src=\"../images/"+arr[n]+"\">");
+*/
+</script>
+</head>
+<body>
+
+</body>
+</html>

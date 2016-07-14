@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>베네치아 게임</title>
+<style>
+#wrapper{
+	width:900px;
+	height:800px;
+	margin:auto;
+/*	background:yellow;*/
+}
+#stage{
+	width:100%;
+	height:650px;
+	background-image:url("../images/background.jpg");
+	background-repeat:no=repeat;
+}
+#controller{
+	/*background:yellow;*/
+	width:100%;
+	height:150px;
+	text-align:center;
+}
+#info{
+	width:400px;
+	height:162px;
+	/*background:green;*/
+	float:left;
+}
+
+#hp{
+	width:176px;
+	height:162px;
+	/*background:black;*/
+	float:left;
+}
+#keyWord{
+	width:250px;
+	height: 60px;
+	background:#ffccff;
+	font-size:20pt;
+}
+</style>
+<script>
+var word=[
+	"태양", "수성", "금성", "지구", "화성", "목성", "토성", "천왕성", "해왕성", "명왕성" 
+];
+var hp;
+var stage;
+var wordArray=new Array(word.length);
+var floorArray=new Array(3);
+var step=10;	//몇픽셀씩 내려오게 할지를 결정하는 변수
+var st;	//셋타임아웃을 가리키는 변수
+var keyWord; //단어입력용
+var score;
+var jumsu=0;
+var limit;	//단어들이 넘지말아야 할 y축의 한계점
+
+function init(){
+	hp=document.getElementById("hp");
+	stage=document.getElementById("stage");
+	keyWord=document.getElementById("keyWord");
+	score=document.getElementById("score");
+
+	//현재 stage의 height를 구해보자
+	alert("stage의 높이는 "+stage.style.height);
+	limit=parseInt(stage.style.height);
+	createHp();	//체력생성 보여주기
+	createTag();	//단어생성 보여주기
+}
+//테이블 생성 
+function createHp(){
+	//문서가 로드되면 hp를 표현하는 테이블을 3*4개로 구성해본다
+	var table=document.createElement("table");
+	table.style.border="2px solid red";
+
+	for(var a=0;a<3;a++){
+		var tr=document.createElement("tr");	
+		var hoArray=new Array(4);
+		for(var i=0;i<4;i++){
+			var td=document.createElement("td");
+			td.style.width=50+"px";
+			td.style.height=30+"px";
+			td.style.background="red";
+			tr.appendChild(td);
+
+			hoArray[i]=td;
+			}
+
+			//한줄이 완성되었으므로 큰 상자에 담자.
+			floorArray[a]=hoArray;
+
+		//테이블 조합하기!!
+		table.appendChild(tr);
+	}
+	//hp div에 table 추가!!
+	hp.appendChild(table);
+}
+function test(){
+	floorArray[2][2].style.background="white";
+}
+/* 게임이 시작되면 단어들이 등장하되 점점 내려오게(top값이 증가)*/
+function gameStart(){
+	drop();
+	keyWord.focus();
+}
+function createTag(){
+	//span태그를 단어만큼 생성하여 stage에 부착하자
+	for(var i=0;i<word.length;i++){
+		//랜덤값 구하기:0~-99사이에서
+		var r = parseInt(Math.random()*100);	//0.xxx난수발생
+		var span=document.createElement("span");
+		span.style.position="relative";
+		span.style.left=(42*i)+"px";
+		span.style.top=-r+"px";
+		span.innerText=word[i];
+		stage.appendChild(span);	
+		//span 지역변수이기 때문에, 후추  for문이 다 돌아간 후에는
+		//접근할 수 없다!! 따라서 전역 배열에 담아둬야 한다!!
+		wordArray[i]=span; 
+	}
+}
+//텍스트 내려오는 효과
+function drop(){
+		for(var i=0; i<word.length; i++){
+			wordArray[i].style.top=parseInt(wordArray[i].style.top)+step+"px";
+		//현재 나오고 있는 단어가 limit값을 넘어섰는지 조사
+		if(parseInt(wordArray[i].style.top) >= limit-(25)){
+		//alert("도달했네요!!");
+		for(var a=0; a<=3; a++){
+			for(var b=0; b<=4; b++){
+				floorArray[a][b].style.background="#FFFFFF";
+			}
+		}
+	}
+		}
+		
+
+	//문서내의 select의 값
+	var speed = document.getElementById("sel").value
+	console.log=("현재 레벨값은"+speed);
+	st=setTimeout("drop()", speed);
+}
+
+//게임 일시정지
+function pause(){
+	clearTimeout(st);
+}
+function enter(){
+	var key=event.keyCode;		
+	if(key==13){
+		//현재 존재하는 단어마다 입력한값과 비교를 한다.
+		//같다면 단어 제거하고 점수 올라감
+		for(var i=0; i<wordArray.length; i++){
+			if(wordArray[i].innerText==keyWord.value){
+				//alert("맞네");
+//				stage.removeChild(wordArray[i]);	//appendChild()의 반대
+				wordArray[i].innerText="";
+				jumsu+=10;
+				score.value=jumsu;
+			}
+		}
+		keyWord.value="";	//방금 입력한 텍스트지우기
+	}
+}
+</script>
+</head>
+<body onLoad="init()">
+	<div id="wrapper">
+		<div id="stage" style="height:550px"></div>
+		<div id="controller">
+			<div id="info">
+				<select id="sel">
+					<option value="1500">1단계</option>
+					<option value="1200">2단계</option>
+					<option value="900">3단계</option>
+					<option value= "600">4단계</option>
+					<option value= "300">5단계</option>
+				</select>	
+				<input type="button" value="Start" onClick="gameStart()">
+				<input type="button" value="Pause" onClick="pause()">
+				<input type="text" value="0" size="5" id="score"> 점<br>
+				<input type="text" id="keyWord" onkeyup="enter()">
+			</div>
+			<div id="hp"></div>
+		</div>
+	</div>
+</body>
+</html>
