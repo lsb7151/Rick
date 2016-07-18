@@ -1,0 +1,18 @@
+mariadb\bin에 간뒤
+
+mysqld
+
+
+cmd창 종료
+
+
+mariadb\bin에 다시 간뒤
+
+C:\mariadb\bin>mysql -h localhost -u root -p
+
+접속
+
+
+
+한글지원되게 하려면
+default charset utf8;
