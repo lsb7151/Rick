@@ -1,0 +1,1 @@
+npm install ejs	//반복문같은것을 html에서 쓰게끔 해주는 외부모듈
