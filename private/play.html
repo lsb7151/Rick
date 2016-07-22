@@ -9,8 +9,8 @@ body{
 margin:0px;
 }
 #wrapper{
-	width:900px;
-	height:630px;
+	width:830px;
+	height:830px;
 	border:1px solid black;
 	text-align:center;
 }
@@ -18,11 +18,36 @@ margin:0px;
 	width:100%;
 	height:100px;
 }
+#sec{
+	width:50px;
+	height:70px;
+	font-size:30pt;
+	border: 0px;
+}
+#mic{
+	width:50px;
+	height:70px;
+	font-size:30pt;
+	border: 0px;
+}
+#mid{
+	width:10px;
+	height:70px;
+	font-size:30pt;
+	border: 0px;
+}
+
 </style>
 <script src="./lib/Card.js"></script>
 <script>
 var stage;
 var num=[];
+
+var x=prompt("스테이지수를 입력하세요");	//숫자 갯수(한줄)
+var ss=60;
+var mm=0;
+var st;
+var bnum=0;
 
 window.addEventListener("load",function(){
 	init();
@@ -30,33 +55,81 @@ window.addEventListener("load",function(){
 
 function init(){
 	stage=document.createElement("div");
-	stage.style.width="90%";
-	stage.style.height=505+"px";
-	stage.style.border="1px solid red";
+	stage.style.width=630+"px";
+	stage.style.height=630+"px";
+	//stage.style.border="1px solid red";
 	stage.style.margin="auto";
+	document.getElementById("sec").value=60;
+	document.getElementById("mic").value=0+"0";
 	wrapper.appendChild(stage);
-		
-	createCard();
+
+	shuffle();
+	
+
 }
 
-
+//숫자카드 호출
 function createCard(){
-	for(var i=1;i<40;i++){
-		var card=new Card(stage, 99, 99, "white", num[i]);
+	for(var i=1;i<=(x*x);i++){
+		var card=new Card(stage, parseInt((610-10)/x), parseInt((610-10)/x), "white", num[i]);
 		card.init();
-		shuffle();
+	
 	}
 }
 
+//중복없는 랜덤숫자 만들기
 function shuffle(){
-	for(var i=0; i<40; i++){
-		num[i] = Math.floor(Math.random() * 40)+1;
-		for(var j=0; j<i; j++){
+	for(var i=0; i<=(x*x); i++){
+		num[i] = Math.floor(Math.random() * (x*x))+1;
+		for(var j=1; j<i; j++){
 			if(num[i]==num[j]){
 				i--;
 			}
 		}
 	}return;
+}
+
+//타이머 만들기
+function timeset(){
+	if(mm==0){
+	   mm=100;
+	   ss--;
+	   document.getElementById("sec").value = ss;
+	   }
+	   mm--;
+	   document.getElementById("mic").value = mm;
+
+		st=setTimeout("timeset()",10);
+
+		document.getElementById("sbt").disabled = true;
+		document.getElementById("nextLv").disabled = true;
+
+	   if(ss==0){
+		   location.href="gameover.html";
+		   clearTimeout(st);
+	   }
+}
+
+//게임시작
+function start(){
+	timeset();  
+	createCard();
+	wrapper.appendChild(stage);
+	
+}
+
+//레벨 클리어
+function clear(){
+	var score1=document.getElementById("sec").value;
+	var score2=document.getElementById("mic").value;
+	alert("현재 레벨 "+x+" !! 당신의 기록은 ["+score1+":"+score2+"] 입니다");
+	clearTimeout(st);
+	wrapper.removeChild(stage);
+	document.getElementById("nextLv").disabled = false;
+}
+
+function nextLv(){
+	//버튼을 누르면 다음 레벨로 이동후 시작(혹은 로드)
 }
 
 
@@ -66,9 +139,12 @@ function shuffle(){
 <div id="wrapper">
 	<div id="top">
 		<input type ="text" id="sec">
+		<input type ="text" value=":" id="mid">
 		<input type ="text" id="mic">
-		<input type="button" value="START">
+				
 	</div>
+	<input type="button" id="sbt"value="START" onClick="start()">
+	<input type="button" id="nextLv" value="Next Lv" onClick="nextLv()">
 </div>
 </body>
 </html>
