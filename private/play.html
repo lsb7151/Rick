@@ -18,6 +18,12 @@ margin:0px;
 	width:100%;
 	height:100px;
 }
+#rightD{
+	width:200px;
+	height: 100%;
+	float:right;
+	text-align:right;
+}
 #sec{
 	width:50px;
 	height:70px;
@@ -36,16 +42,28 @@ margin:0px;
 	font-size:30pt;
 	border: 0px;
 }
-
+#leftD{
+	width: 200px;
+	height:70px;
+	font-size:30pt;
+	float:left;
+	border: 0px;
+}
+input{
+	width: 70px;
+	height:30px;
+}
 </style>
+<script src="./lib/Set.js"></script>
 <script src="./lib/Card.js"></script>
 <script>
 var stage;
 var num=[];
-
+var bg=["white","white","white","white","white","white","#ffffcc"];
 var x=prompt("스테이지수를 입력하세요");	//숫자 갯수(한줄)
 var ss=60;
 var mm=0;
+var leftD;
 var st;
 var bnum=0;
 
@@ -60,20 +78,16 @@ function init(){
 	//stage.style.border="1px solid red";
 	stage.style.margin="auto";
 	document.getElementById("sec").value=60;
-	document.getElementById("mic").value=0+"0";
-	wrapper.appendChild(stage);
-
-	shuffle();
-	
-
+	document.getElementById("mic").value=0+"0";	
 }
+
 
 //숫자카드 호출
 function createCard(){
 	for(var i=1;i<=(x*x);i++){
-		var card=new Card(stage, parseInt((610-10)/x), parseInt((610-10)/x), "white", num[i]);
+		var card=new Card(stage, parseInt((610-10)/x), parseInt((610-10)/x), bg, num[i]);
 		card.init();
-	
+
 	}
 }
 
@@ -103,6 +117,7 @@ function timeset(){
 
 		document.getElementById("sbt").disabled = true;
 		document.getElementById("nextLv").disabled = true;
+		document.getElementById("fin").disabled = true;
 
 	   if(ss==0){
 		   location.href="gameover.html";
@@ -112,25 +127,46 @@ function timeset(){
 
 //게임시작
 function start(){
+	document.getElementById("leftD").value="STAGE"+ x;
 	timeset();  
+	shuffle();
 	createCard();
-	wrapper.appendChild(stage);
-	
+	wrapper.appendChild(stage);	
 }
 
 //레벨 클리어
 function clear(){
 	var score1=document.getElementById("sec").value;
 	var score2=document.getElementById("mic").value;
-	alert("현재 레벨 "+x+" !! 당신의 기록은 ["+score1+":"+score2+"] 입니다");
+	alert("현재 스테이지 "+x+" !! 당신의 기록은 ["+score1+":"+score2+"] 입니다");
 	clearTimeout(st);
-	wrapper.removeChild(stage);
 	document.getElementById("nextLv").disabled = false;
+	document.getElementById("fin").disabled = false;
+	wrapper.removeChild(stage);
+	stage.innerHTML="";
 }
 
 function nextLv(){
 	//버튼을 누르면 다음 레벨로 이동후 시작(혹은 로드)
+	ss=60;
+	mm=0;	
+	x++;
+	start();	
 }
+
+function stop(){
+	//버튼을 누르면 게임 끝 그리고 기록갱신
+
+}
+
+/* 게임오버를 stage div안에 출력하려고 함
+function gameOver(){
+	wrapper.removeChild(stage);
+	stage.innerHTML="";
+	clearTimeOut(st);
+	set.init();
+}*/
+
 
 
 </script>
@@ -141,10 +177,13 @@ function nextLv(){
 		<input type ="text" id="sec">
 		<input type ="text" value=":" id="mid">
 		<input type ="text" id="mic">
-				
+		<input type ="text" id="leftD">
+		<div id="rightD">
+			<input type="button" id="sbt"value="START" onClick="start()"><br>
+			<input type="button" id="fin" value="그만하기" onClick="stop()"><br>
+			<input type="button" id="nextLv" value="Next Lv" onClick="nextLv()">
+		</div>
 	</div>
-	<input type="button" id="sbt"value="START" onClick="start()">
-	<input type="button" id="nextLv" value="Next Lv" onClick="nextLv()">
-</div>
+	</div>
 </body>
 </html>
