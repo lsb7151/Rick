@@ -6,11 +6,25 @@
 <style>
 body{
 	text-align:center;
-	font-size:100pt;
+}
+#space{
+	width:830px;
+	height:830px;
+	text-align:center;
+	border:1px solid black;
 }
 </style>
+<script>
+function back(){
+	location.href="play.html";
+
+}
+</script>
 </head>
 <body>
-GAME OVER
+<div id="space">
+<img id="img" src="./img/gameover.png"><br>
+<img id="rtry" src="./img/retry.png" onClick="back()">
+</div>
 </body>
 </html>

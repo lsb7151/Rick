@@ -37,6 +37,7 @@ var Card=function(stage,width,height,bg,cnum){
 			}else if(me.cnum==(x*x)){
 				clear();
 				bnum=0;
+				down.removeChild(stage);
 			}return;
 			
 		});
